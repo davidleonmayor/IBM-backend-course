@@ -1,5 +1,3 @@
-Perfecto, aquí tienes tu **Contributing Guidelines** en un inglés más profesional y con formato limpio, siguiendo el estilo de repositorios grandes en GitHub:
-
 ---
 
 # Contributing Guidelines
