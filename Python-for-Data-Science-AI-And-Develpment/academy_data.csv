@@ -1,0 +1,6 @@
+StudentID,Name,Age,Course,Progress (%),Completed,Grade,EnrollmentDate
+101,Anna,22,Intro to Python,85,True,9.0,2025-06-01
+102,Luis,28,Data Science,60,False,7.5,2025-06-15
+103,Maria,31,Machine Learning,100,True,9.8,2025-05-10
+104,Charles,25,Intro to Python,45,False,6.0,2025-07-01
+105,Sophia,27,Data Science,70,False,8.2,2025-06-20

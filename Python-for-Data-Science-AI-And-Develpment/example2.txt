@@ -1,0 +1,6 @@
+This is an example file.
+It contains some text data.
+This line is appended to the file.
+Appending more text data.
+This line is appended to the file.
+Appending more text data.

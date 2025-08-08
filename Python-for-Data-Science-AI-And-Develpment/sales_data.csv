@@ -1,0 +1,11 @@
+Date,Product,Category,Units_Sold,Unit_Price,Total_Sales,Region
+2025-01-05,Notebook,Stationery,20,2.5,50.0,North
+2025-01-06,Pen,Stationery,50,1.0,50.0,East
+2025-01-07,Laptop,Electronics,5,500,2500.0,West
+2025-01-08,Mouse,Electronics,10,25,250.0,North
+2025-01-09,Desk,Furniture,2,150,300.0,South
+2025-01-10,Chair,Furniture,4,75,300.0,East
+2025-01-11,Notebook,Stationery,30,2.5,75.0,West
+2025-01-12,Monitor,Electronics,3,200,600.0,North
+2025-01-13,Pen,Stationery,40,1.0,40.0,South
+2025-01-14,Chair,Furniture,2,75,150.0,East
