@@ -1,0 +1,39 @@
+{% extends "core/base.html" %}
+
+{% block title %}Delete {{ object.title }} - Course Platform{% endblock %}
+
+{% block content %}
+<div class="breadcrumb">
+    <a href="{% url 'core_course_list' %}">Courses</a> > 
+    <a href="{% url 'core_course_detail' object.id %}">{{ object.title }}</a> > Delete
+</div>
+
+<div class="header">
+    <h1>⚠️ Confirm Deletion</h1>
+</div>
+
+<div class="card">
+    <div class="alert alert-error">
+        <strong>Warning:</strong> This action cannot be undone!
+    </div>
+    
+    <p>Are you sure you want to delete the course "<strong>{{ object.title }}</strong>"?</p>
+    
+    <div style="margin: 20px 0; padding: 15px; background: #f8f9fa; border-radius: 5px;">
+        <p><strong>This will also delete:</strong></p>
+        <ul>
+            <li>All lessons in this course ({{ object.lessons.count }})</li>
+            <li>All classes in those lessons</li>
+            <li>All student enrollments</li>
+        </ul>
+    </div>
+    
+    <form method="post">
+        {% csrf_token %}
+        <div class="actions">
+            <button type="submit" class="btn btn-danger">Yes, Delete Course</button>
+            <a href="{% url 'core_course_detail' object.id %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
