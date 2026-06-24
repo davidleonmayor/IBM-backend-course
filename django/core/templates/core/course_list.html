@@ -1,0 +1,67 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<div class="header">
+    <h1>📚 Plataforma de Cursos</h1>
+    <p>Descubre y aprende nuevas habilidades con nuestros cursos de calidad</p>
+</div>
+
+{% if courses %}
+<div class="course-grid">
+    {% for course in courses %}
+    <div class="course-card">
+        <div class="course-image">
+            {{ course.title|default:"Curso"|slice:6 }}{% if course.title|length > 6 %}...{% endif %}
+        </div>
+        <div class="course-content">
+            <h2 class="course-title">{{ course.title }}</h2>
+            <p class="course-description">
+                {% if course.description %}
+                    {{ course.description|truncatechars:100 }}
+                {% else %}
+                    Curso disponible para principiantes y nivel intermedio. Diseñado para ayudarte a desarrollar nuevas habilidades.
+                {% endif %}
+            </p>
+            <div class="course-meta">
+                <span>👥 {{ course.users.count }} estudiantes inscritos</span>
+                <span>📝 {{ course.lessons.count }} lecciones</span>
+            </div>
+            <button class="enroll-button" onclick="enrollCourse({{ course.id }})">
+                Inscribirse Gratis
+            </button>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="error">
+    <h3>No hay cursos disponibles en este momento.</h3>
+    <p>¡Vuelve más tarde para descubrir nuevos cursos!</p>
+</div>
+{% endif %}
+
+<script>
+function enrollCourse(courseId) {
+    // Get the current user (simplified - in real app, use session/token)
+    const userEmail = "estudiante@example.com"; // Mock user
+    
+    fetch(`/api/enroll/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            course_id: courseId,
+            student_email: userEmail
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert('¡Inscripción exitosa! Bienvenido al curso.');
+    })
+    .catch(error => {
+        alert('Error al inscribirse. Intenta de nuevo.');
+    });
+}
+</script>
+{% endblock %}
