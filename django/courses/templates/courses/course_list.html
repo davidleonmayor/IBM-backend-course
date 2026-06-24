@@ -1,0 +1,43 @@
+{% extends "courses/base.html" %}
+
+{% block title %}Courses - Course Platform{% endblock %}
+
+{% block content %}
+<div class="header">
+    <h1>📚 Course Catalog</h1>
+    <p>Discover and enroll in our available courses</p>
+</div>
+
+<div class="actions" style="margin-bottom: 20px;">
+    <a href="{% url 'courses_create' %}" class="btn btn-primary">+ Create New Course</a>
+</div>
+
+{% if courses %}
+<div class="grid">
+    {% for course in courses %}
+    <div class="card">
+        <h2 style="margin-bottom: 10px;">{{ course.title }}</h2>
+        <p style="color: #666; margin-bottom: 15px;">
+            {% if course.description %}
+                {{ course.description|truncatechars:150 }}
+            {% else %}
+                No description available.
+            {% endif %}
+        </p>
+        <div style="margin-bottom: 15px;">
+            <span class="badge">👥 {{ course.users.count }} enrolled</span>
+        </div>
+        <div class="actions">
+            <a href="{% url 'courses_detail' course.id %}" class="btn btn-primary">View Details</a>
+            <a href="{% url 'courses_update' course.id %}" class="btn btn-secondary">Edit</a>
+            <a href="{% url 'courses_delete' course.id %}" class="btn btn-danger">Delete</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="card">
+    <p>No courses available yet. Create the first one!</p>
+</div>
+{% endif %}
+{% endblock %}

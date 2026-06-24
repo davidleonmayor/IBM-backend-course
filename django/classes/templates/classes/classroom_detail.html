@@ -1,0 +1,34 @@
+{% extends "classes/base.html" %}
+
+{% block title %}{{ classroom.title }} - Course Platform{% endblock %}
+
+{% block content %}
+<div class="breadcrumb">
+    <a href="{% url 'courses_list' %}">Courses</a> > 
+    <a href="{% url 'courses_detail' course.id %}">{{ course.title }}</a> > 
+    <a href="{% url 'lessons_list' course.id %}">Lessons</a> > 
+    <a href="{% url 'lessons_detail' lesson.id %}">{{ lesson.title }}</a> > 
+    <a href="{% url 'classroom_list' lesson.id %}">Classes</a> > {{ classroom.title }}
+</div>
+
+<div class="header">
+    <h1>{{ classroom.title }}</h1>
+    <p>Lesson: {{ classroom.title }} | Order: {{ classroom.order }}</p>
+</div>
+
+<div class="card">
+    <h2>📊 Class Info</h2>
+    <p><strong>Course:</strong> {{ course.title }}</p>
+    <p><strong>Lesson:</strong> {{ lesson.title }}</p>
+    <p><strong>Order:</strong> {{ classroom.order }}</p>
+    <p><strong>Duration:</strong> {{ classroom.duration|default:"Not specified" }}</p>
+    <div class="actions" style="margin-top: 15px;">
+        <a href="{% url 'classroom_update' classroom.id %}" class="btn btn-secondary">Edit Class</a>
+    </div>
+</div>
+
+<div class="actions">
+    <a href="{% url 'classroom_list' lesson.id %}" class="btn btn-secondary">← Back to Classes</a>
+    <a href="{% url 'classroom_delete' classroom.id %}" class="btn btn-danger">Delete Class</a>
+</div>
+{% endblock %}

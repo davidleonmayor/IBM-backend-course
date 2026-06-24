@@ -1,0 +1,30 @@
+{% extends "lessons/base.html" %}
+
+{% block title %}{{ lesson.title }} - Course Platform{% endblock %}
+
+{% block content %}
+<div class="breadcrumb">
+    <a href="{% url 'courses_list' %}">Courses</a> > 
+    <a href="{% url 'courses_detail' lesson.course.id %}">{{ lesson.course.title }}</a> > 
+    <a href="{% url 'lessons_list' lesson.course.id %}">Lessons</a> > {{ lesson.title }}
+</div>
+
+<div class="header">
+    <h1>{{ lesson.title }}</h1>
+    <p>Course: {{ lesson.course.title }} | Order: {{ lesson.order }}</p>
+</div>
+
+<div class="card">
+    <h2>📊 Lesson Info</h2>
+    <p><strong>Course:</strong> {{ lesson.course.title }}</p>
+    <p><strong>Order:</strong> {{ lesson.order }}</p>
+    <div class="actions" style="margin-top: 15px;">
+        <a href="{% url 'lessons_update' lesson.id %}" class="btn btn-secondary">Edit Lesson</a>
+    </div>
+</div>
+
+<div class="actions">
+    <a href="{% url 'lessons_list' lesson.course.id %}" class="btn btn-secondary">← Back to Lessons</a>
+    <a href="{% url 'lessons_delete' lesson.id %}" class="btn btn-danger">Delete Lesson</a>
+</div>
+{% endblock %}

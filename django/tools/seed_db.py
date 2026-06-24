@@ -12,11 +12,14 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mysite.settings')
 django.setup()
 
 from django.contrib.auth.hashers import make_password
-from core.models import User, Course, Lesson, Class
+from accounts.models import User
+from courses.models import Course
+from lessons.models import Lesson
+from classes.models import Classroom
 
 # Clear existing data
 print("🧹 Clearing existing data...")
-Class.objects.all().delete()
+Classroom.objects.all().delete()
 Lesson.objects.all().delete()
 Course.objects.all().delete()
 User.objects.all().delete()
@@ -114,7 +117,7 @@ for data in courses_data:
         )
 
         for j, class_title in enumerate(lesson_data["classes"]):
-            Class.objects.create(
+            Classroom.objects.create(
                 lesson=lesson,
                 title=class_title,
                 order=j
@@ -147,7 +150,7 @@ print("="*50)
 print(f"  👤 Users:      {User.objects.count()}")
 print(f"  📚 Courses:    {Course.objects.count()}")
 print(f"  📝 Lessons:    {Lesson.objects.count()}")
-print(f"  🎯 Classes:    {Class.objects.count()}")
+print(f"  🎯 Classes:    {Classroom.objects.count()}")
 print(f"  🔗 Enrollments: {sum(c.users.count() for c in courses)}")
 print("="*50)
 print("\n🔑 Test accounts:")

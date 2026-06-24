@@ -1,0 +1,58 @@
+{% extends "classes/base.html" %}
+
+{% block title %}Classes in {{ lesson.title }} - Course Platform{% endblock %}
+
+{% block content %}
+<div class="breadcrumb">
+    <a href="{% url 'courses_list' %}">Courses</a> > 
+    <a href="{% url 'courses_detail' course.id %}">{{ course.title }}</a> > 
+    <a href="{% url 'lessons_list' course.id %}">Lessons</a> > 
+    <a href="{% url 'lessons_detail' lesson.id %}">{{ lesson.title }}</a> > Classes
+</div>
+
+<div class="header">
+    <h1>🎓 Classes in {{ lesson.title }}</h1>
+    <p>{{ classrooms.count }} classes available</p>
+</div>
+
+<div class="actions" style="margin-bottom: 20px;">
+    <a href="{% url 'classroom_create' lesson.id %}" class="btn btn-primary">+ Add New Class</a>
+</div>
+
+{% if classrooms %}
+<table>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Class Title</th>
+            <th>Duration</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for classroom in classrooms %}
+        <tr>
+            <td>{{ classroom.order }}</td>
+            <td>
+                <a href="{% url 'classroom_detail' classroom.id %}">{{ classroom.title }}</a>
+            </td>
+            <td>{{ classroom.duration|default:"—" }}</td>
+            <td>
+                <a href="{% url 'classroom_detail' classroom.id %}" class="btn btn-primary" style="padding: 5px 10px;">View</a>
+                <a href="{% url 'classroom_update' classroom.id %}" class="btn btn-secondary" style="padding: 5px 10px;">Edit</a>
+                <a href="{% url 'classroom_delete' classroom.id %}" class="btn btn-danger" style="padding: 5px 10px;">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="card">
+    <p>No classes yet. Add the first class to this lesson.</p>
+</div>
+{% endif %}
+
+<div class="actions">
+    <a href="{% url 'lessons_detail' lesson.id %}" class="btn btn-secondary">← Back to Lesson</a>
+</div>
+{% endblock %}

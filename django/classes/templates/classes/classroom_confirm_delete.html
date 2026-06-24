@@ -1,0 +1,40 @@
+{% extends "classes/base.html" %}
+
+{% block title %}Delete {{ object.title }} - Course Platform{% endblock %}
+
+{% block content %}
+<div class="breadcrumb">
+    <a href="{% url 'courses_list' %}">Courses</a> > 
+    <a href="{% url 'courses_detail' course.id %}">{{ course.title }}</a> > 
+    <a href="{% url 'lessons_list' course.id %}">Lessons</a> > 
+    <a href="{% url 'lessons_detail' lesson.id %}">{{ lesson.title }}</a> > 
+    <a href="{% url 'classroom_list' lesson.id %}">Classes</a> > Delete
+</div>
+
+<div class="header">
+    <h1>⚠️ Confirm Deletion</h1>
+</div>
+
+<div class="card">
+    <div class="alert alert-error">
+        <strong>Warning:</strong> This action cannot be undone!
+    </div>
+    
+    <p>Are you sure you want to delete the class "<strong>{{ object.title }}</strong>"?</p>
+    
+    <div style="margin: 20px 0; padding: 15px; background: #f8f9fa; border-radius: 5px;">
+        <p><strong>This will also delete:</strong></p>
+        <ul>
+            <li>All resources and assignments for this class</li>
+        </ul>
+    </div>
+    
+    <form method="post">
+        {% csrf_token %}
+        <div class="actions">
+            <button type="submit" class="btn btn-danger">Yes, Delete Class</button>
+            <a href="{% url 'classroom_detail' object.id %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

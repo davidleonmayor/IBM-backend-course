@@ -1,0 +1,47 @@
+{% extends "lessons/base.html" %}
+
+{% block title %}{% if object %}Edit {{ object.title }}{% else %}Create Lesson{% endif %} - Course Platform{% endblock %}
+
+{% block content %}
+<div class="breadcrumb">
+    <a href="{% url 'courses_list' %}">Courses</a> > 
+    <a href="{% url 'courses_detail' course.id %}">{{ course.title }}</a> > 
+    {% if object %}
+        <a href="{% url 'lessons_list' course.id %}">Lessons</a> > Edit
+    {% else %}
+        Create New
+    {% endif %}
+</div>
+
+<div class="header">
+    <h1>{% if object %}Edit Lesson{% else %}Create New Lesson{% endif %}</h1>
+    <p>Course: {{ course.title }}</p>
+</div>
+
+<div class="card">
+    <form method="post">
+        {% csrf_token %}
+        
+        {% for field in form %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}
+            <div class="alert alert-error">
+                {% for error in field.errors %}
+                <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+        
+        <div class="actions">
+            <button type="submit" class="btn btn-primary">
+                {% if object %}Save Changes{% else %}Create Lesson{% endif %}
+            </button>
+            <a href="{% url 'lessons_list' course.id %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

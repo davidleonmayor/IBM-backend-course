@@ -1,0 +1,42 @@
+{% extends "courses/base.html" %}
+
+{% block title %}{{ course.title }} - Course Platform{% endblock %}
+
+{% block content %}
+<div class="breadcrumb">
+    <a href="{% url 'courses_list' %}">Courses</a> > {{ course.title }}
+</div>
+
+<div class="header">
+    <h1>{{ course.title }}</h1>
+    <p>{{ course.description|default:"No description" }}</p>
+</div>
+
+<div class="grid">
+    <div class="card">
+        <h2>📊 Course Info</h2>
+        <p><strong>Students enrolled:</strong> {{ course.users.count }}</p>
+        <div class="actions" style="margin-top: 15px;">
+            <a href="{% url 'courses_update' course.id %}" class="btn btn-secondary">Edit Course</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>👥 Enrolled Students</h2>
+        {% if course.users.all %}
+        <ul>
+            {% for user in course.users.all %}
+            <li>{{ user.names }} {{ user.last_names }} ({{ user.email }})</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No students enrolled yet.</p>
+        {% endif %}
+    </div>
+</div>
+
+<div class="actions">
+    <a href="{% url 'courses_list' %}" class="btn btn-secondary">← Back to Courses</a>
+    <a href="{% url 'courses_delete' course.id %}" class="btn btn-danger">Delete Course</a>
+</div>
+{% endblock %}
