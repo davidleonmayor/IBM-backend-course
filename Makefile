@@ -17,3 +17,6 @@ shell:
 
 createsuperuser:
 	uv run python django/manage.py createsuperuser
+
+seed:
+	uv run python django/tools/seed_db.py
